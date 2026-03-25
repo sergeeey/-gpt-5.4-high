@@ -1,109 +1,181 @@
-# GPT-5.4 High Methodology
+# GPT-5.4 High Operating System
 
 Separate workspace for operating methodology around `gpt-5.4` / `gpt-5.4 high`.
 
 This repository is intentionally separate from `Claude-cod-top-2026`.
-The Claude repository remains the Claude Code operating system.
-This repository is the GPT / Codex / Responses API operating system.
+That repo remains the Claude Code operating system.
+This repo is the GPT / Codex / Responses API operating system.
 
-## Purpose
+## Why this exists
 
-Build a repeatable way to use `gpt-5.4` for:
+Most AI configs are either:
 
-- complex coding and refactoring
-- long-horizon agent workflows
-- tool-using research and verification
-- MCP-connected external systems
-- production-safe execution with explicit evidence
+- one bloated prompt
+- a pile of disconnected notes
+- demo examples with no safety, no evals, and no execution discipline
 
-The baseline assumption is simple:
+This repository takes the opposite approach:
 
-- `gpt-5.4` is the default model for complex reasoning and coding according to current OpenAI docs.
-- The Responses API is the preferred runtime for GPT-5.4 workflows.
-- Tool use is part of the design, not an afterthought.
-- Verification is mandatory for important claims and code changes.
+- modular rules instead of one giant instruction blob
+- evidence and verification instead of vibes
+- narrow, auditable tool use instead of "give the model everything"
+- high autonomy inside a clear safety boundary
+- strong support for a non-professional programmer who still wants expert-level output
 
-## Repository Layout
+The target experience is simple:
 
-- `AGENTS.md` - core operating profile for GPT-5.4 high
-- `rules/evidence-and-safety.md` - evidence discipline, prompt injection posture, PII and approval rules
-- `rules/tool-selection.md` - when to use web search, MCP, shell, code interpreter, apply patch, computer use, background mode
-- `rules/verification.md` - evaluation, review, staging, and verification standards
-- `docs/openai-source-map.md` - current official OpenAI source map used to ground this methodology
-- `docs/patterns/` - implementation patterns for Responses API, tools, MCP, and long-horizon work
-- `skills/` - reusable operating modes for recurring GPT-5.4 workflows
-- `checklists/` - risk-based completion standards
-- `prompts/` - reusable prompt blocks and composed prompt patterns
-- `evals/` - evaluation scaffolding, synthetic datasets, and grader guidance
-- `mcp/` - trust profiles and approval policies for external tool ecosystems
-- `examples/responses/` - example Responses API payloads
-- `examples/agents/` - end-to-end loop examples in Python and JavaScript
-- `templates/task-brief.md` - scoped work template
-- `templates/eval-checklist.md` - lightweight eval and release checklist
+the agent should feel like a compact council of sharp specialists, not a chatbot improvising.
 
 ## Current OpenAI Baseline
 
-As of the current official docs:
+As grounded in the current official docs:
 
-- Start with `gpt-5.4` for complex reasoning and coding.
+- `gpt-5.4` is the default starting point for complex reasoning and coding.
+- The `Responses API` is the preferred runtime for GPT-5.4 workflows.
 - `gpt-5.4` supports `reasoning.effort` values `none`, `low`, `medium`, `high`, and `xhigh`.
-- `gpt-5.4` supports a 1M+ context window and a broad hosted tool surface in the Responses API, including web search, file search, code interpreter, hosted shell, apply patch, skills, computer use, MCP, and tool search.
-- For harder problems, `gpt-5.4-pro` is available in the Responses API and OpenAI recommends background mode for requests that may take several minutes.
+- GPT-5.4 supports a wide hosted tool surface including web search, file search, code interpreter, shell, apply patch, computer use, MCP, and tool search.
+- For harder problems, `gpt-5.4-pro` is available as the slower, deeper-thinking option.
 
-Official sources:
+Primary sources:
 
 - https://developers.openai.com/api/docs/models
 - https://developers.openai.com/api/docs/models/gpt-5.4
 - https://developers.openai.com/api/docs/guides/latest-model
 
-## Design Stance
+## Architecture
 
-This methodology is opinionated:
+```mermaid
+flowchart TD
+    A["AGENTS.md"] --> B["rules/"]
+    B --> C["skills/"]
+    C --> D["checklists/"]
+    D --> E["prompts/"]
+    E --> F["evals/"]
+    F --> G["mcp/"]
+    G --> H["examples/"]
+```
 
-- Use `gpt-5.4` as the main worker.
-- Use `high` reasoning deliberately for hard engineering work, not by reflex for every trivial task.
-- Prefer local evidence and real execution over speculative advice.
-- Keep prompts modular and operational.
-- Keep tool access explicit, narrow, and auditable.
+More detail:
 
-## Operating Layers
+- [Architecture](docs/architecture.md)
+- [Audit And Verification](docs/audit-and-verification.md)
+- [OpenAI Source Map](docs/openai-source-map.md)
 
-This repository is designed in layers:
+## What it is optimized for
 
-1. `AGENTS.md`
-Core operating contract.
+- autonomous coding and debugging
+- tool-heavy agent workflows
+- current-docs verification
+- safe MCP usage
+- non-programmer operator support
+- concise, high-signal execution
 
-2. `rules/`
-Global discipline for evidence, tools, and verification.
+## Repository Map
 
-3. `skills/`
-Reusable task modes like coding, research, tool-heavy execution, and release hardening.
+| Area | Purpose |
+|---|---|
+| [`AGENTS.md`](AGENTS.md) | core operating profile |
+| [`rules/`](rules) | evidence, safety, tools, verification |
+| [`skills/`](skills) | recurring operating modes |
+| [`checklists/`](checklists) | risk-based completion bars |
+| [`prompts/`](prompts) | prompt blocks, composed prompts, production packs |
+| [`evals/`](evals) | failure taxonomy, datasets, graders, real eval templates |
+| [`mcp/`](mcp) | trust tiers, profiles, approval policy |
+| [`docs/patterns/`](docs/patterns) | implementation patterns and operating modes |
+| [`examples/responses/`](examples/responses) | JSON payload examples |
+| [`examples/agents/`](examples/agents) | Python and JavaScript loop examples |
+| [`scripts/`](scripts) | repository verification tooling |
+| [`templates/`](templates) | task and eval templates |
 
-4. `checklists/`
-Risk-scaled completion standards.
+## Signature Modes
 
-5. `prompts/`
-Reusable prompt blocks and composed prompt structures.
+### 1. Autonomous execution
 
-6. `evals/`
-Datasets, failure taxonomies, and grader scaffolding.
+The default posture is:
 
-7. `mcp/`
-Trust tiers, read/write boundaries, and approval policy for connected systems.
+- brief context check
+- execute
+- verify
+- report
 
-8. `docs/patterns/`
-Concrete integration patterns for OpenAI runtimes and tool ecosystems.
+Not:
 
-9. `examples/`
-Payloads and implementation templates that can be copied into real systems.
+- over-plan
+- over-ask
+- over-explain
 
-## Status
+### 2. Non-programmer mentor support
 
-This repository starts as a grounded baseline, not as the final form.
-Next iterations should expand:
+The operator does not need to know every hidden engineering trap in advance.
+The agent is expected to:
 
-- domain-specific skills
-- long-horizon workflow templates
-- OpenAI tool harness patterns
-- eval sets and failure taxonomies
-- MCP trust tiers and approval policies
+- surface non-obvious errors
+- point out material best practices
+- choose robust defaults
+- stay concise instead of turning into a textbook
+
+### 3. Narrow-tool discipline
+
+The model should not get every tool just because it can.
+This repo biases toward:
+
+- local-first
+- read-only before write
+- constrained MCP usage
+- approval only at the real risk boundary
+
+## Quick Start
+
+Read in this order:
+
+1. [`AGENTS.md`](AGENTS.md)
+2. [`prompts/production/sergey-autonomous-mentor.md`](prompts/production/sergey-autonomous-mentor.md)
+3. [`docs/patterns/sergey-workspace-mode.md`](docs/patterns/sergey-workspace-mode.md)
+4. [`mcp/approval-policy.md`](mcp/approval-policy.md)
+5. [`evals/real/`](evals/real)
+
+## Verify The Repo
+
+```powershell
+pwsh -File .\scripts\verify.ps1
+```
+
+Current verification covers:
+
+- JSON examples
+- JSONL eval datasets
+- Python example compilation
+- JavaScript syntax checks
+- referenced OpenAI docs URLs
+
+## Recommended Prompt Packs
+
+| Pack | Use when |
+|---|---|
+| [`sergey-default`](prompts/production/sergey-default.md) | general work in Sergey workspace |
+| [`sergey-fast-lane`](prompts/production/sergey-fast-lane.md) | small safe-lane tasks |
+| [`sergey-autonomous-mentor`](prompts/production/sergey-autonomous-mentor.md) | non-programmer operator with maximum leverage |
+| [`coding-production`](prompts/production/coding-production.md) | production-facing coding agent |
+| [`research-production`](prompts/production/research-production.md) | docs and current-fact verification |
+| [`tool-heavy-agent-production`](prompts/production/tool-heavy-agent-production.md) | long-running or tool-heavy execution |
+
+## Current Maturity
+
+This is already a working operating system, not a placeholder.
+
+It now includes:
+
+- layered operating rules
+- autonomous mentor mode
+- MCP trust and approval profiles
+- real-style eval cases
+- verification automation
+- end-to-end example loops
+- architecture and verification docs
+
+## Next High-Value Iterations
+
+- add real task traces from actual daily workflows
+- turn successful patterns into stronger real eval datasets
+- add domain-specific packs for your most common project types
+- add richer grader rubrics tied to your actual success criteria
