@@ -35,6 +35,7 @@ The baseline assumption is simple:
 - `checklists/` - risk-based completion standards
 - `prompts/` - reusable prompt blocks and composed prompt patterns
 - `evals/` - evaluation scaffolding, synthetic datasets, and grader guidance
+- `mcp/` - trust profiles and approval policies for external tool ecosystems
 - `examples/responses/` - example Responses API payloads
 - `examples/agents/` - end-to-end loop examples in Python and JavaScript
 - `templates/task-brief.md` - scoped work template
@@ -87,10 +88,13 @@ Reusable prompt blocks and composed prompt structures.
 6. `evals/`
 Datasets, failure taxonomies, and grader scaffolding.
 
-7. `docs/patterns/`
+7. `mcp/`
+Trust tiers, read/write boundaries, and approval policy for connected systems.
+
+8. `docs/patterns/`
 Concrete integration patterns for OpenAI runtimes and tool ecosystems.
 
-8. `examples/`
+9. `examples/`
 Payloads and implementation templates that can be copied into real systems.
 
 ## Status
