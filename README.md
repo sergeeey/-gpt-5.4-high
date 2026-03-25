@@ -59,6 +59,7 @@ More detail:
 
 - [Architecture](docs/architecture.md)
 - [Audit And Verification](docs/audit-and-verification.md)
+- [Work Methodology](docs/work-methodology.md)
 - [OpenAI Source Map](docs/openai-source-map.md)
 
 ## What it is optimized for
