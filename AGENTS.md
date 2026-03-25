@@ -6,6 +6,29 @@ These rules define how to operate `gpt-5.4` for coding, research, tool use, and 
 
 This profile is for GPT and Codex workflows, not Claude Code runtime hooks.
 
+## Rule Precedence
+
+When repository guidance conflicts, resolve it in this order:
+
+1. `AGENTS.md`
+2. `rules/`
+3. `checklists/`
+4. `skills/`
+5. `prompts/production/`
+6. `prompts/composed/`
+7. `prompts/blocks/`
+8. `docs/`
+9. `examples/`
+
+Interpretation rules:
+
+- higher layers define constraints, lower layers provide adaptation and examples
+- prompt packs must not override safety, evidence, or approval rules from higher layers
+- docs explain the system but do not overrule the contract
+- examples are illustrative, not normative
+
+See also: `docs/rule-precedence.md`
+
 ## Model Defaults
 
 - Default model: `gpt-5.4`

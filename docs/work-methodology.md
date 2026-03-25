@@ -1,17 +1,16 @@
 # Work Methodology
 
-This document describes the full operating methodology of this repository.
+This document is the narrative layer for the repository.
 
-It is the single narrative layer above:
+It explains how the system is meant to work.
+It is not the canonical source of every rule.
+
+Canonical enforcement lives in:
 
 - `AGENTS.md`
 - `rules/`
-- `skills/`
 - `checklists/`
-- `prompts/`
-- `evals/`
-- `mcp/`
-- `examples/`
+- `docs/rule-precedence.md`
 
 ## 1. Core philosophy
 
@@ -23,18 +22,13 @@ This repository is built on five ideas:
 4. Verification is mandatory for meaningful work.
 5. The operator may not be a professional programmer, so the agent must compensate for missing hidden knowledge.
 
-The repository is designed so the agent feels like a compact expert council:
+The repository is designed so the agent behaves like a disciplined expert operator:
 
-- senior engineer
-- reviewer
-- debugger
-- verifier
-- architect
-- ops-minded executor
-- documentation checker
-- non-programmer mentor
-
-But the output must still stay concise, practical, and action-oriented.
+- autonomous when safe
+- evidence-first
+- risk-aware
+- concise
+- useful to a non-professional programmer
 
 ## 2. Operating posture
 
@@ -110,22 +104,9 @@ Everything important should be grounded in one of:
 - test output
 - reproducible behavior
 
-The repository uses evidence markers:
+See canonical details in:
 
-- `[DOCS]`
-- `[CODE]`
-- `[RUN]`
-- `[TEST]`
-- `[INFERRED]`
-- `[MEMORY]`
-- `[UNKNOWN]`
-
-Core evidence rules:
-
-- no phantom URLs, flags, parameters, or packages
-- no fake confidence about versions or capabilities
-- no unlabeled synthetic data
-- no recommendation without a reason
+- `rules/evidence-and-safety.md`
 
 ## 6. Tool methodology
 
@@ -135,38 +116,11 @@ Tools are chosen by job, not by novelty.
 
 Use local evidence first when local files, logs, shell output, or code can answer the question.
 
-### Web search
+Canonical details live in:
 
-Use when facts may have changed or when current external docs, releases, or policies matter.
-
-### File search
-
-Use for retrieval over stable corpora, not as a replacement for ordinary browsing.
-
-### MCP
-
-Use only when direct integration with an external system is part of the workflow.
-Do not widen the MCP surface unless the current task actually needs it.
-
-### Shell
-
-Use for real environment inspection, builds, tests, installs, logs, and deterministic command-line work.
-
-### Code interpreter
-
-Use for iterative Python analysis, file transformations, generated artifacts, and data work.
-
-### Apply patch
-
-Use for precise, reviewable edits instead of large freeform rewrites.
-
-### Computer use
-
-Use only when the UI is the source of truth or when end-to-end interface validation is required.
-
-### Tool search
-
-Use when the available tool surface is too large to preload efficiently.
+- `rules/tool-selection.md`
+- `mcp/trust-matrix.md`
+- `mcp/approval-policy.md`
 
 ## 7. MCP methodology
 
@@ -200,18 +154,6 @@ It uses three layers:
 Prompt design rule:
 
 start with the smallest prompt that passes evals, then add blocks only when they fix a measured failure mode.
-
-Typical blocks include:
-
-- task contract
-- tool hygiene
-- verification contract
-- safety boundary
-- commentary/final phase discipline
-- research citation
-- repo-aware coding
-
-Production packs then compose these blocks for actual working modes.
 
 ## 9. Workflow modes
 
@@ -278,24 +220,10 @@ Behavior:
 
 No meaningful work is complete until the smallest sufficient verification has been run.
 
-The verification ladder is:
+Canonical details live in:
 
-- smoke
-- targeted
-- task-level
-- release-level
-
-Review should normally happen in three passes:
-
-1. spec pass
-2. quality pass
-3. adversarial pass
-
-The final report should always distinguish:
-
-- what changed
-- what was actually verified
-- what remains unverified
+- `rules/verification.md`
+- `checklists/`
 
 ## 11. Eval methodology
 
@@ -314,6 +242,7 @@ The repository separates:
 
 - synthetic eval scaffolding
 - real eval cases tied to actual working scenarios
+- grader rubrics for real workflows
 
 ## 12. Daily usage pattern
 
@@ -350,6 +279,7 @@ To keep this repository healthy:
 
 - rerun `scripts/verify.ps1` after meaningful changes
 - refresh official OpenAI source references when model or tool docs change
+- update `docs/assumptions-register.md` when volatile claims change
 - expand real eval cases from actual failures and near-misses
 - keep prompt packs small and evidence-driven
 - avoid prompt bloat and duplicated rules

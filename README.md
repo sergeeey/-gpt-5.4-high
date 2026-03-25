@@ -8,23 +8,13 @@ This repo is the GPT / Codex / Responses API operating system.
 
 ## Why this exists
 
-Most AI configs are either:
+This repository is a disciplined operating system for `gpt-5.4` work:
 
-- one bloated prompt
-- a pile of disconnected notes
-- demo examples with no safety, no evals, and no execution discipline
-
-This repository takes the opposite approach:
-
-- modular rules instead of one giant instruction blob
+- modular rules instead of one giant prompt
 - evidence and verification instead of vibes
-- narrow, auditable tool use instead of "give the model everything"
+- narrow, auditable tool use instead of broad ambient access
 - high autonomy inside a clear safety boundary
-- strong support for a non-professional programmer who still wants expert-level output
-
-The target experience is simple:
-
-the agent should feel like a compact council of sharp specialists, not a chatbot improvising.
+- explicit support for a non-professional programmer who still wants expert-level output
 
 ## Current OpenAI Baseline
 
@@ -60,16 +50,9 @@ More detail:
 - [Architecture](docs/architecture.md)
 - [Audit And Verification](docs/audit-and-verification.md)
 - [Work Methodology](docs/work-methodology.md)
+- [Rule Precedence](docs/rule-precedence.md)
+- [Assumptions Register](docs/assumptions-register.md)
 - [OpenAI Source Map](docs/openai-source-map.md)
-
-## What it is optimized for
-
-- autonomous coding and debugging
-- tool-heavy agent workflows
-- current-docs verification
-- safe MCP usage
-- non-programmer operator support
-- concise, high-signal execution
 
 ## Repository Map
 
@@ -88,42 +71,23 @@ More detail:
 | [`scripts/`](scripts) | repository verification tooling |
 | [`templates/`](templates) | task and eval templates |
 
-## Signature Modes
+## Canonical Sources
 
-### 1. Autonomous execution
+When guidance overlaps, use this order:
 
-The default posture is:
+1. [`AGENTS.md`](AGENTS.md)
+2. [`rules/`](rules)
+3. [`checklists/`](checklists)
+4. [`skills/`](skills)
+5. [`prompts/production/`](prompts/production)
+6. [`prompts/composed/`](prompts/composed)
+7. [`prompts/blocks/`](prompts/blocks)
+8. [`docs/`](docs)
+9. [`examples/`](examples)
 
-- brief context check
-- execute
-- verify
-- report
+Full policy:
 
-Not:
-
-- over-plan
-- over-ask
-- over-explain
-
-### 2. Non-programmer mentor support
-
-The operator does not need to know every hidden engineering trap in advance.
-The agent is expected to:
-
-- surface non-obvious errors
-- point out material best practices
-- choose robust defaults
-- stay concise instead of turning into a textbook
-
-### 3. Narrow-tool discipline
-
-The model should not get every tool just because it can.
-This repo biases toward:
-
-- local-first
-- read-only before write
-- constrained MCP usage
-- approval only at the real risk boundary
+- [Rule Precedence](docs/rule-precedence.md)
 
 ## Quick Start
 
@@ -133,7 +97,8 @@ Read in this order:
 2. [`prompts/production/sergey-autonomous-mentor.md`](prompts/production/sergey-autonomous-mentor.md)
 3. [`docs/patterns/sergey-workspace-mode.md`](docs/patterns/sergey-workspace-mode.md)
 4. [`mcp/approval-policy.md`](mcp/approval-policy.md)
-5. [`evals/real/`](evals/real)
+5. [`evals/graders/real-workflows.md`](evals/graders/real-workflows.md)
+6. [`evals/real/`](evals/real)
 
 ## Verify The Repo
 
@@ -148,6 +113,8 @@ Current verification covers:
 - Python example compilation
 - JavaScript syntax checks
 - referenced OpenAI docs URLs
+- real-eval schema coverage
+- assumptions register freshness
 
 ## Recommended Prompt Packs
 
@@ -160,23 +127,11 @@ Current verification covers:
 | [`research-production`](prompts/production/research-production.md) | docs and current-fact verification |
 | [`tool-heavy-agent-production`](prompts/production/tool-heavy-agent-production.md) | long-running or tool-heavy execution |
 
-## Current Maturity
+## What is still missing
 
-This is already a working operating system, not a placeholder.
+The main gap is now empirical, not conceptual:
 
-It now includes:
-
-- layered operating rules
-- autonomous mentor mode
-- MCP trust and approval profiles
-- real-style eval cases
-- verification automation
-- end-to-end example loops
-- architecture and verification docs
-
-## Next High-Value Iterations
-
-- add real task traces from actual daily workflows
-- turn successful patterns into stronger real eval datasets
-- add domain-specific packs for your most common project types
-- add richer grader rubrics tied to your actual success criteria
+- more real traces
+- scored eval runs over time
+- scoreboards for prompt and policy changes
+- richer real-world failure logs
