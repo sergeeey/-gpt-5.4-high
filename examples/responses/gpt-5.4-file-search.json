@@ -1,0 +1,16 @@
+{
+  "model": "gpt-5.4",
+  "input": "Summarize the latest architecture decision in the internal docs and include the exact source chunk in the response data.",
+  "tools": [
+    {
+      "type": "file_search",
+      "vector_store_ids": [
+        "<vector_store_id>"
+      ],
+      "max_num_results": 3
+    }
+  ],
+  "include": [
+    "file_search_call.results"
+  ]
+}

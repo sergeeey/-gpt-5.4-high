@@ -1,0 +1,1 @@
+{"id":"real-001","workflow":"production coding fix","input":"<user request here>","expected_outcome":"<what success looks like>","must_do":["read relevant files","run targeted verification"],"must_not_do":["broad rewrite","claim unrun tests passed"],"risk_class":"major","notes":"template row - replace with a real case"}

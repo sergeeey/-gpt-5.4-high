@@ -1,0 +1,45 @@
+{
+  "model": "gpt-5.4",
+  "tools": [
+    {
+      "type": "function",
+      "name": "search_docs",
+      "description": "Search the internal docs corpus.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "query"
+        ],
+        "additionalProperties": false
+      },
+      "defer_loading": true
+    },
+    {
+      "type": "function",
+      "name": "list_open_orders",
+      "description": "List open orders for a customer ID.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "customer_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "customer_id"
+        ],
+        "additionalProperties": false
+      },
+      "defer_loading": true
+    },
+    {
+      "type": "tool_search"
+    }
+  ],
+  "input": "Find the right tool to look up open orders for customer CUST-12345, then use it."
+}

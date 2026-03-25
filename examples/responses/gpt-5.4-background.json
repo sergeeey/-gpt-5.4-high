@@ -1,0 +1,8 @@
+{
+  "model": "gpt-5.4",
+  "background": true,
+  "reasoning": {
+    "effort": "high"
+  },
+  "input": "Analyze this large document set, identify the top three contradictions, and produce a cited reconciliation memo."
+}

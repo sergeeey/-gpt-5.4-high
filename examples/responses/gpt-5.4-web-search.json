@@ -1,0 +1,11 @@
+{
+  "model": "gpt-5.4",
+  "tools": [
+    {
+      "type": "web_search",
+      "external_web_access": false
+    }
+  ],
+  "tool_choice": "auto",
+  "input": "Find today's sunrise time in Paris and cite the source."
+}

@@ -1,0 +1,10 @@
+{
+  "model": "gpt-5.4",
+  "reasoning": {
+    "effort": "high"
+  },
+  "text": {
+    "verbosity": "medium"
+  },
+  "input": "Inspect the repository, make the smallest safe fix for the failing test, run the narrowest sufficient verification, and then report Implemented and Verified separately."
+}

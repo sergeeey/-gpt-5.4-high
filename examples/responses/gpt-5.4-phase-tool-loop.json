@@ -1,0 +1,22 @@
+{
+  "model": "gpt-5.4",
+  "input": [
+    {
+      "role": "assistant",
+      "phase": "commentary",
+      "content": "I will inspect the logs, verify the failure mode, and only then propose a fix."
+    },
+    {
+      "role": "user",
+      "content": "Continue and use the available tools."
+    }
+  ],
+  "tools": [
+    {
+      "type": "web_search"
+    },
+    {
+      "type": "code_interpreter"
+    }
+  ]
+}

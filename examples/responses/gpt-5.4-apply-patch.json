@@ -1,0 +1,16 @@
+{
+  "model": "gpt-5.4",
+  "instructions": "Use apply_patch for minimal targeted edits. After patching, run the narrowest sufficient test before claiming success.",
+  "tools": [
+    {
+      "type": "apply_patch"
+    },
+    {
+      "type": "shell",
+      "environment": {
+        "type": "local"
+      }
+    }
+  ],
+  "input": "Fix the typo in the parser error message and verify with the relevant unit test."
+}
